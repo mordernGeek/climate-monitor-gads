@@ -21,6 +21,9 @@ jobs:
           run: |
             python -m pip install --upgrade pip
             pip install -r requirements.txt 
+            
+        - name: Run Snyk
+          run: npx snyk test
         
         - name: Set up QEMU
           uses: docker/setup-qemu-action@v1
@@ -41,3 +44,4 @@ jobs:
             file: ./Dockerfile
             push: true
             tags: k3n3chukwu/cloud-monitor-gads:latest
+            
