@@ -8,6 +8,8 @@
 #env for the location and climate // pip install geopy && pip install meteostat && pip install requests
 #Install Python 3.6 or higher 
 
+import yaml
+
 from os import statvfs_result
 
 from flask import Flask, jsonify, request, session, render_template, url_for, redirect, flash
@@ -124,7 +126,9 @@ def result():
 	
 		return render_template('result.html', msg = msg)
 	
-
+def apply_security_configurations():
+    with open('security.yaml') as file:
+        config = yaml.load(file, Loader=yaml.FullLoader)
 
 
 if __name__ == "__main__": 
