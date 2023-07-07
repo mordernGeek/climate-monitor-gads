@@ -23,6 +23,8 @@ jobs:
             pip install -r requirements.txt 
             
         - name: Authenticate with Snyk
+          env:
+            SNYK_TOKEN: ${{ secrets.SNYK_TOKEN }}
           run: npx snyk auth  
           
         - name: Run Snyk
