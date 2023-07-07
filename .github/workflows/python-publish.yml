@@ -22,6 +22,9 @@ jobs:
             python -m pip install --upgrade pip
             pip install -r requirements.txt 
             
+        - name: Authenticate with Snyk
+          run: npx snyk auth  
+          
         - name: Run Snyk
           run: npx snyk test
         
