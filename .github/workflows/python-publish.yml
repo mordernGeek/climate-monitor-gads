@@ -22,13 +22,12 @@ jobs:
             python -m pip install --upgrade pip
             pip install -r requirements.txt 
             
-        - name: Authenticate with Snyk
+        - name: Run Snyk to check for vulnerabilities
+          uses: snyk/actions/node@master
           env:
             SNYK_TOKEN: ${{ secrets.SNYK_TOKEN }}
-          run: npx snyk auth  
-          
-        - name: Run Snyk
-          run: npx snyk test
+          with:
+            command: test
         
         - name: Set up QEMU
           uses: docker/setup-qemu-action@v1
