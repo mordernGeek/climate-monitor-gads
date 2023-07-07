@@ -1,0 +1,13 @@
+server:
+  - disable_banner: true
+  - enable_secure_headers: true
+  - enforce_https: true
+authentication:
+  - use_strong_passwords: true
+  - implement_multi-factor_authentication: true
+access_controls:
+  - restrict_admin_access: true
+  - limit_privileges_based_on_roles: true
+logging:
+  - enable_audit_logging: true
+  - configure_log_retention: true
