@@ -2,7 +2,7 @@
 
 FROM python:3.9
 LABEL owner="Kenechukwu Nzute"
-EXPOSE 80
+EXPOSE 5000
 WORKDIR /climate-monitor-gads
 COPY ./ .
 RUN pip install -r requirements.txt
