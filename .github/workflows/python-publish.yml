@@ -34,7 +34,12 @@ jobs:
           env:
             SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
           with:
-            projectBaseDir: .
+            args: >
+              -Dsonar.host.url=${{ secrets.SONAR_HOST_URL }}
+              -Dsonar.projectKey=davintus
+              -Dsonar.organization=Davintus
+              -Dsonar.sources=.
+              -Dsonar.language=python
         
         - name: Set up QEMU
           uses: docker/setup-qemu-action@v1
