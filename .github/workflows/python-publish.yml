@@ -28,18 +28,6 @@ jobs:
             SNYK_TOKEN: ${{ secrets.SNYK_TOKEN }}
           with:
             command: test
-            
-        - name: Run SonarQube
-          uses: sonarsource/sonarqube-scan-action@v1
-          env:
-            SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
-          with:
-            args: >
-              -Dsonar.host.url=${{ secrets.SONAR_HOST_URL }}
-              -Dsonar.projectKey=davintus
-              -Dsonar.organization=Davintus
-              -Dsonar.sources=.
-              -Dsonar.language=python
         
         - name: Set up QEMU
           uses: docker/setup-qemu-action@v1
