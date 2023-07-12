@@ -1,6 +1,6 @@
 ## dockerfile for Climate Monitor Project - GADS
 
-FROM python:3.9-alpine
+FROM python:3.8
 LABEL owner="Damie Banjoko"
 EXPOSE 80
 WORKDIR /climate-monitor-gads
