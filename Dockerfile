@@ -1,6 +1,6 @@
 ## docker file for Climate Monitor Project - GADS
 
-FROM python:3.9
+FROM python:3.12.0b3-slim
 LABEL owner="Kenechukwu Nzute"
 EXPOSE 5000
 WORKDIR /climate-monitor-gads
