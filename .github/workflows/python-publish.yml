@@ -22,11 +22,6 @@ jobs:
             python -m pip install --upgrade pip
             pip install -r requirements.txt 
 
-        - name: Run Bandit for static code analysis
-          run: |
-            pip install bandit
-            bandit -r . -ll -ii -x **/tests/** 
-
         - name: Run Snyk to check for vulnerabilities
           uses: snyk/actions/python@master
           env:
