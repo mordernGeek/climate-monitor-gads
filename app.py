@@ -10,6 +10,8 @@
 
 from os import statvfs_result
 
+import secrets
+
 from flask import Flask, jsonify, request, session, render_template, url_for, redirect, flash
 from logging import Logger
 import json, requests
@@ -27,8 +29,9 @@ longitude = ""
 latitude =""
 
 app = Flask(__name__) 
+my_secrets = secrets.token_hex(16)
 
-app.secret_key = PRIVATE-KEY-HERE
+app.secret_key = my_secrets
 
 @app.route('/')
 def home():
@@ -128,4 +131,4 @@ def result():
 
 
 if __name__ == "__main__": 
-	app.run(host='0.0.0.0', port=80, debug=True)
+	app.run(host='0.0.0.0', port=5000, debug=True)

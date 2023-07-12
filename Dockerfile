@@ -2,7 +2,7 @@
 
 FROM python:3.8
 LABEL owner="Damie Banjoko"
-EXPOSE 80
+EXPOSE 5001
 WORKDIR /climate-monitor-gads
 COPY ./ .
 RUN pip install -r requirements.txt

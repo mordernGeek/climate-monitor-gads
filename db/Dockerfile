@@ -12,4 +12,4 @@ RUN mkdir /data
 WORKDIR /data
 
 # Expose the SQLite port
-EXPOSE 8080
+EXPOSE 5000
