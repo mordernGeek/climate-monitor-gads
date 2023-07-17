@@ -11,6 +11,7 @@
 from os import statvfs_result
 
 import secrets
+import prometheus_client
 
 from flask import Flask, jsonify, request, session, render_template, url_for, redirect, flash
 from logging import Logger
@@ -19,8 +20,16 @@ import http.client
 from logging import Logger
 from datetime import datetime
 from werkzeug.exceptions import abort
+from prometheus_client.core import CollectorRegistry
+from prometheus_client import Summary, Counter, Histogram, Gauge
 
 from geopy.geocoders import Nominatim #importing a py geolocation library
+
+# Create Prometheus metrics
+request_time_summary = Summary('request_processing_seconds', 'Time spent processing requests')
+total_requests_counter = Counter('total_requests', 'Total number of requests')
+your_custom_metric = Gauge('your_custom_metric', 'Custom metric for consumption monitoring')
+your_memory_metric = Gauge('your_memory_metric', 'Custom metric for memory leak detection')
 
 geofinder = Nominatim(user_agent="app") # initializing the library
 current_city = ""
@@ -126,9 +135,18 @@ def result():
 
 	
 		return render_template('result.html', msg = msg)
-	
+
+
+# Prometheus alert annotation
+@app.route('/healthz')
+def health_check():
+    return "OK"
 
 
 
 if __name__ == "__main__": 
-	app.run(host='0.0.0.0', port=5000, debug=True)
+    # Start the Prometheus HTTP server on a separate thread
+	prometheus_client.start_http_server(8000)
+    
+    #Run the Application
+app.run(host='0.0.0.0', port=1902, debug=True)
