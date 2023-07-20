@@ -48,5 +48,5 @@ groups:
           severity: warning
         annotations:
           summary: "Health Check Failed"
-          description: "The application health check failed with HTTP status code {{ $value }}."
+          description: "The application health check failed with HTTP status code {{ $labels.http_status }}."
 
