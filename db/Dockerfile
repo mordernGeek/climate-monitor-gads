@@ -1,15 +1,19 @@
-## dockerfile for sqlite
-#Base Image
-FROM alpine:latest
+# Dockerfile for Sqlite database
 
-# Install SQLite
-RUN apk --no-cache add sqlite
+# using ubuntu:latest image from docker-hub
+FROM ubuntu:latest
 
-# Create a directory for the SQLite database file
-RUN mkdir /data
+# basic update all command
+RUN apt-get update -y
 
-# Set the working directory
-WORKDIR /data
+# installing sqlite and its dependencies
+RUN apt-get install -y sqlite3 libsqlite3-dev
 
-# Expose the SQLite port
-EXPOSE 5000
+# creating a directory to store the database
+RUN mkdir /db
+
+# using it as current working directory
+WORKDIR /db
+
+# entrypoint to our database which start with command sqlite3
+ENTRYPOINT [ "sqlite3" ]
