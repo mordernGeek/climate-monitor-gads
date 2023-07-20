@@ -1,19 +1,16 @@
-# Dockerfile for Sqlite database
-
-# using ubuntu:latest image from docker-hub
-FROM ubuntu:latest
-
-# basic update all command
-RUN apt-get update -y
-
-# installing sqlite and its dependencies
-RUN apt-get install -y sqlite3 libsqlite3-dev
-
-# creating a directory to store the database
-RUN mkdir /db
-
-# using it as current working directory
-WORKDIR /db
-
-# entrypoint to our database which start with command sqlite3
-ENTRYPOINT [ "sqlite3" ]
+services:
+  redis:
+    image: redislabs/redismod
+    ports:
+      - '6379:6379'
+  web:
+    build:
+      context: .
+      target: dev-envs
+    stop_signal: SIGINT
+    ports:
+      - '8000:8000'
+    volumes:
+      - /var/run/docker.sock:/var/run/docker.sock
+    depends_on:
+      - redis
