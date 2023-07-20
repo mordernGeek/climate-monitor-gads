@@ -3,3 +3,4 @@ Werkzeug
 geopy
 meteostat
 requests
+prometheus_client
