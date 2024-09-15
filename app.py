@@ -8,9 +8,12 @@
 #env for the location and climate // pip install geopy && pip install meteostat && pip install requests
 #Install Python 3.6 or higher 
 
+import yaml
+
 from os import statvfs_result
 
 from flask import Flask, jsonify, request, session, render_template, url_for, redirect, flash
+from prometheus_client import Counter, start_http_server
 from logging import Logger
 import json, requests
 import http.client
@@ -30,9 +33,14 @@ app = Flask(__name__)
 
 app.secret_key = PRIVATE-KEY-HERE
 
+# Define a Prometheus Counter
+requests_counter = Counter('http_requests_total', 'Total HTTP requests')
+
 @app.route('/')
 def home():
     return render_template('home.html')
+
+
 
 @app.route('/main', methods=('GET', 'POST'))
 def main():
@@ -124,8 +132,12 @@ def result():
 	
 		return render_template('result.html', msg = msg)
 	
-
+def apply_security_configurations():
+    with open('security.yaml') as file:
+        config = yaml.load(file, Loader=yaml.FullLoader)
 
 
 if __name__ == "__main__": 
 	app.run(host='0.0.0.0', port=80, debug=True)
+ 
+start_http_server(8000)
